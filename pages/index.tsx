@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {prisma} from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 
 export const getServerSideProps = async () => {
   const ogCards = await prisma.card.findMany()
@@ -9,16 +9,28 @@ export const getServerSideProps = async () => {
 export default function Home({ogCards}) {
   const [cards, setCards] = useState([...ogCards]);
 
-  console.log(ogCards);
-
   const [frontInput, setFrontInput] = useState("");
   const [backInput, setBackInput] = useState(""); 
 
-  const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+  async function handleAdd(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
-    setCards([...cards, {front: frontInput, back: backInput}])
-    setFrontInput("")
-    setBackInput("")
+
+    const data = {
+      front: frontInput,
+      back: backInput
+    };
+
+    fetch('/api/card', {
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json"
+      },
+      body:JSON.stringify(data),})
+    .then(( response ) => response.json()).then( (data) => {
+      setFrontInput('')
+      setBackInput('')
+      setCards([...cards, data])}
+    );
   }
 
   return (
