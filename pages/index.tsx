@@ -6,11 +6,11 @@ export const getServerSideProps = async () => {
   return { props: { ogCards } }
 }
 
-export default function Home({ogCards}) {
+export default function Home({ ogCards }) {
   const [cards, setCards] = useState([...ogCards]);
 
-  const [frontInput, setFrontInput] = useState("");
-  const [backInput, setBackInput] = useState(""); 
+  const [frontInput, setFrontInput] = useState('');
+  const [backInput, setBackInput] = useState(''); 
 
   async function handleAdd(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
@@ -23,7 +23,7 @@ export default function Home({ogCards}) {
     fetch('/api/card', {
       method:"POST",
       headers:{
-          "Content-Type":"application/json"
+          'Content-Type':'application/json'
       },
       body:JSON.stringify(data),})
     .then(( response ) => response.json()).then( (data) => {
@@ -35,9 +35,7 @@ export default function Home({ogCards}) {
 
   return (
     <div className='md:container mx-auto'>
-      <h1 className='text-3xl font-bold underline mb-10'>
-        add card
-      </h1>
+      <h1 className='text-3xl font-bold underline mb-10'>add card</h1>
       <form className='mb-10'>
         <div className='inline-flex items-end b-6 w-full space-x-10'>
           <div className='flex-grow'>
@@ -48,7 +46,7 @@ export default function Home({ogCards}) {
             <label htmlFor='back' className='mb-2 text-sm text-gray-900'>Back</label>
             <input type='text' id='back' value={backInput} onChange={(e) => setBackInput(e.target.value)}className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5' placeholder='árvore'/>
           </div>
-          <button type="submit" onClick={(e) => handleAdd(e)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 h-fit focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">add</button>
+          <button type="submit" onClick={(e) => handleAdd(e)} className="text-white bg-blue-700 hover:bg-blue-800 h-fit font-medium rounded-lg text-sm px-5 py-2.5">add</button>
         </div>
       </form>
 
