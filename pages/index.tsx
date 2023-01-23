@@ -1,10 +1,15 @@
 import { useState } from 'react'
+import {prisma} from '../lib/prisma';
 
-export default function Home() {
-  const [cards, setCards] = useState([
-    {front: 'tree', back: 'árvore'},
-    {front: 'ball', back: 'bola'}
-  ]);
+export const getServerSideProps = async () => {
+  const ogCards = await prisma.card.findMany()
+  return { props: { ogCards } }
+}
+
+export default function Home({ogCards}) {
+  const [cards, setCards] = useState([...ogCards]);
+
+  console.log(ogCards);
 
   const [frontInput, setFrontInput] = useState("");
   const [backInput, setBackInput] = useState(""); 
