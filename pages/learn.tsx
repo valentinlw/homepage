@@ -12,6 +12,7 @@ export default function Learn({ ogCards }) {
 
     const handleNext = (difficulty: Number) => {
       setCards(([first, ...rest]) => [...rest, first])
+      setHidden(true)
     }
 
     return (
@@ -33,10 +34,10 @@ export default function Learn({ ogCards }) {
           </div>}
           {!hidden && <div className='my-5'>
             <div className='flex justify-around'>
-              <button className='font-medium bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(1)}>1</button>
-              <button className='font-medium bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(2)}>2</button>
-              <button className='font-medium bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(3)}>3</button>
-              <button className='font-medium bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(4)}>4</button>
+              <button className='font-medium text-white bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(1)}>1</button>
+              <button className='font-medium text-white bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(2)}>2</button>
+              <button className='font-medium text-white bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(3)}>3</button>
+              <button className='font-medium text-white bg-blue-700 rounded-lg text-sm px-5 py-2.5 w-max' onClick={(e)=> handleNext(4)}>4</button>
             </div>
           </div>}
         </div>

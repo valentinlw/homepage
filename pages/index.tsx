@@ -3,6 +3,7 @@ import { prisma } from '../lib/prisma';
 
 export const getServerSideProps = async () => {
   const ogCards = await prisma.card.findMany()
+  ogCards.sort((a,b) => b.id - a.id)
   return { props: { ogCards } }
 }
 
@@ -29,13 +30,14 @@ export default function Home({ ogCards }) {
     .then(( response ) => response.json()).then( (data) => {
       setFrontInput('')
       setBackInput('')
-      setCards([...cards, data])}
+      setCards([data, ...cards])}
     );
   }
 
   return (
     <div className='md:container mx-auto'>
       <h1 className='text-3xl font-bold underline mb-10'>add card</h1>
+      <h2 className='text-slate-400'>{cards.length} cards</h2>
       <form className='mb-10'>
         <div className='inline-flex items-end b-6 w-full space-x-10'>
           <div className='flex-grow'>
